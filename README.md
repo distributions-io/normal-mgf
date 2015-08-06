@@ -2,13 +2,13 @@ Moment-Generating Function
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> [normal](https://en.wikipedia.org/wiki/normal_distribution) distribution moment-generating function (MGF).
+> [Normal](https://en.wikipedia.org/wiki/normal_distribution) distribution moment-generating function (MGF).
 
 The [moment-generating function](https://en.wikipedia.org/wiki/Moment-generating_function) for a [normal](https://en.wikipedia.org/wiki/normal_distribution) random variable is
 
 <div class="equation" align="center" data-raw-text="
-    M_X(t) := \mathbb{E}\!\left[e^{tX}\right]" data-equation="eq:mgf_function">
-	<img src="" alt="Moment-generating function (MGF) for a normal distribution.">
+	M_X(t) := \mathbb{E}\!\left[e^{tX}\right] = \exp\{ \mu t + \frac{1}{2}\sigma^2t^2 \}" data-equation="eq:mgf_function">
+	<img src="https://cdn.rawgit.com/distributions-io/normal-mgf/43f0edf5568d775dcae19d75bbb5964bbcc0de31/docs/img/eqn.svg" alt="Moment-generating function (MGF) for a normal distribution.">
 	<br>
 </div>
 
@@ -41,18 +41,18 @@ var matrix = require( 'dstructs-matrix' ),
 	i;
 
 out = mgf( 1 );
-// returns
+// returns ~1.649
 
 out = mgf( -1 );
-// returns 0
+// returns ~1.649
 
 t = [ 0, 0.5, 1, 1.5, 2, 2.5 ];
 out = mgf( t );
-// returns [...]
+// returns [ 1, ~1.133, ~1.649, ~3.08, ~7.389, ~22.76 ]
 
 t = new Int8Array( t );
 out = mgf( t );
-// returns Float64Array( [...] )
+// returns Float64Array( [1,1,~1.649,~1.649,~7.389,~7.389] )
 
 t = new Float32Array( 6 );
 for ( i = 0; i < 6; i++ ) {
@@ -67,9 +67,9 @@ mat = matrix( t, [3,2], 'float32' );
 
 out = mgf( mat );
 /*
-	[
-
-	   ]
+	[  1	 ~1.133
+	  ~1.649 ~3.08
+	  ~7.389 ~22.76 ]
 */
 ```
 
@@ -77,8 +77,8 @@ The function accepts the following `options`:
 
 *	__mu__: mean. Default: `0`.
 *	__sigma__: standard deviation. Default: `1`.
-* 	__accessor__: accessor `function` for accessing `array` values.
-* 	__dtype__: output [`typed array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) or [`matrix`](https://github.com/dstructs/matrix) data type. Default: `float64`.
+*	 __accessor__: accessor `function` for accessing `array` values.
+*	 __dtype__: output [`typed array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) or [`matrix`](https://github.com/dstructs/matrix) data type. Default: `float64`.
 *	__copy__: `boolean` indicating if the `function` should return a new data structure. Default: `true`.
 *	__path__: [deepget](https://github.com/kgryte/utils-deep-get)/[deepset](https://github.com/kgryte/utils-deep-set) key path.
 *	__sep__: [deepget](https://github.com/kgryte/utils-deep-get)/[deepset](https://github.com/kgryte/utils-deep-set) key path separator. Default: `'.'`.
@@ -89,10 +89,10 @@ A [normal](https://en.wikipedia.org/wiki/normal_distribution) distribution is a 
 var t = [ 0, 0.5, 1, 1.5, 2, 2.5 ];
 
 var out = mgf( t, {
-	'mu': 9,
-	'sigma': 9
+	'mu': 1,
+	'sigma': 2
 });
-// returns [...]
+// returns [ 1, ~2.719, ~20.086, ~403.429, ~22026.466, ~3269017.372 ]
 ```
 
 For non-numeric `arrays`, provide an accessor `function` for accessing `array` values.
@@ -114,7 +114,7 @@ function getValue( d, i ) {
 var out = mgf( data, {
 	'accessor': getValue
 });
-// returns [...]
+// returns [ 1, ~1.133, ~1.649, ~3.08, ~7.389, ~22.76 ]
 ```
 
 
@@ -136,15 +136,14 @@ var out = mgf( data, {
 });
 /*
 	[
-		{'x':[0,]},
-		{'x':[1,]},
-		{'x':[2,]},
-		{'x':[3,]},
-		{'x':[4,]},
-		{'x':[5,]}
+		{'x':[0,1]},
+		{'x':[1,~1.133]},
+		{'x':[2,~1.649]},
+		{'x':[3,~3.08]},
+		{'x':[4,~7.389]},
+		{'x':[5,~22.76]}
 	]
 */
-
 var bool = ( data === out );
 // returns true
 ```
@@ -159,13 +158,13 @@ t = new Int8Array( [0,1,2,3,4] );
 out = mgf( t, {
 	'dtype': 'int32'
 });
-// returns Int32Array( [...] )
+// returns Int32Array( [1,1,7,90,2980] )
 
 // Works for plain arrays, as well...
 out = mgf( [0,0.5,1,1.5,2], {
 	'dtype': 'uint8'
 });
-// returns Uint8Array( [...] )
+// returns Uint8Array( [1,1,1,3,7] )
 ```
 
 By default, the function returns a new data structure. To mutate the input data structure (e.g., when input values can be discarded or when optimizing memory usage), set the `copy` option to `false`.
@@ -182,7 +181,7 @@ t = [ 0, 0.5, 1, 1.5, 2 ];
 out = mgf( t, {
 	'copy': false
 });
-// returns [...]
+// returns [ 1, ~1.133, ~1.649, ~3.08, ~7.389, ~22.76 ]
 
 bool = ( t === out );
 // returns true
@@ -202,9 +201,9 @@ out = mgf( mat, {
 	'copy': false
 });
 /*
-	[
-
-	   ]
+	[  1	 ~1.133
+	  ~1.649 ~3.08
+	  ~7.389 ~22.76 ]
 */
 
 bool = ( mat === out );
