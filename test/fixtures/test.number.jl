@@ -1,8 +1,8 @@
 using Distributions
 using JSON
 
-mu = 0
-sigma = 1
+mu = -2
+sigma = 0.5
 d = Normal( mu,sigma )
 
 x = [ -5, -2.5, 0, 2.5, 5 ]

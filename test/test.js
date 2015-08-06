@@ -132,15 +132,13 @@ describe( 'distributions-normal-mgf', function tests() {
 			data = validationData.data,
 			expected = validationData.expected.map( function( d ) {
 				return d === 'Inf' ? Infinity : d;
-			}),
-			mu = validationData.mu,
-		sigma = validationData.sigma;
+			});
 
 			var actual;
 			for ( var i = 0; i < data.length; i++ ) {
 				actual =  mgf( data[ i ], {
 					'mu': validationData.mu,
-		'sigma': validationData.sigma
+					'sigma': validationData.sigma
 				});
 				if ( isFiniteNumber( actual ) && isFiniteNumber( expected[ i ] ) ) {
 					assert.closeTo( actual, expected[ i ] , 1e-14 );
@@ -164,7 +162,7 @@ describe( 'distributions-normal-mgf', function tests() {
 
 		actual = mgf( data, {
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 		assert.notEqual( actual, data );
 
@@ -195,7 +193,7 @@ describe( 'distributions-normal-mgf', function tests() {
 			expected,
 			i;
 
-		data = new Float32Array( validationData.data );
+		data = new Float64Array( validationData.data );
 
 		expected = new Float64Array( validationData.expected.map( function( d ) {
 			return d === 'Inf' ? Infinity : d;
@@ -203,7 +201,7 @@ describe( 'distributions-normal-mgf', function tests() {
 
 		actual = mgf( data, {
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 		assert.notEqual( actual, data );
 
@@ -217,9 +215,9 @@ describe( 'distributions-normal-mgf', function tests() {
 		actual = mgf( data, {
 			'copy': false,
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
-		expected = new Float32Array( validationData.expected.map( function( d ) {
+		expected = new Float64Array( validationData.expected.map( function( d ) {
 			return d === 'Inf' ? Infinity : d;
 		}) );
 		assert.strictEqual( actual, data );
@@ -247,7 +245,7 @@ describe( 'distributions-normal-mgf', function tests() {
 		actual = mgf( data, {
 			'dtype': 'float32',
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 
 		assert.notEqual( actual, data );
@@ -278,7 +276,7 @@ describe( 'distributions-normal-mgf', function tests() {
 		actual = mgf( data, {
 			'accessor': getValue,
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 		assert.notEqual( actual, data );
 
@@ -293,7 +291,7 @@ describe( 'distributions-normal-mgf', function tests() {
 			'accessor': getValue,
 			'copy': false,
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 		assert.strictEqual( actual, data );
 
@@ -322,7 +320,7 @@ describe( 'distributions-normal-mgf', function tests() {
 		actual = mgf( data, {
 			'path': 'x.1',
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 
 		expected = validationData.expected
@@ -349,7 +347,7 @@ describe( 'distributions-normal-mgf', function tests() {
 			'path': 'x/1',
 			'sep': '/',
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 		assert.strictEqual( actual, data );
 
@@ -376,7 +374,7 @@ describe( 'distributions-normal-mgf', function tests() {
 		mat = matrix( d1, [5,5], 'float64' );
 		out = mgf( mat, {
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 
 		for ( i = 0; i < out.length; i++ ) {
@@ -389,7 +387,7 @@ describe( 'distributions-normal-mgf', function tests() {
 		out = mgf( mat, {
 			'copy': false,
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 		assert.strictEqual( mat, out );
 
@@ -415,7 +413,7 @@ describe( 'distributions-normal-mgf', function tests() {
 		out = mgf( mat, {
 			'dtype': 'float32',
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 
 		assert.strictEqual( out.dtype, 'float32' );

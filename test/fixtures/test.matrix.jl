@@ -1,8 +1,8 @@
 using Distributions
 using JSON
 
-mu = 0
-sigma = 1
+mu = 3
+sigma = 0.4
 d = Normal( mu,sigma )
 
 x = linspace( 1, 0, 25 )
