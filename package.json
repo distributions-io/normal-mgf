@@ -1,7 +1,7 @@
 {
   "name": "distributions-normal-mgf",
   "version": "0.0.0",
-  "description": "normal distribution moment-generating function (MGF)",
+  "description": "Normal distribution moment-generating function (MGF)",
   "author": {
     "name": "Philipp Burckhardt",
     "email": "pburckhardt@outlook.com"
@@ -20,20 +20,24 @@
   "main": "./lib",
   "repository": {
     "type": "git",
-    "url": "git://github.com/compute-io/normal-mgf.git"
+    "url": "git://github.com/distributions-io/normal-mgf.git"
   },
   "keywords": [
     "distributions.io",
     "distributions",
+    "distribution",
     "probability",
     "statistics",
     "stats",
     "mgf",
     "generating functions",
-    "moments"
+    "moments",
+    "continuous",
+    "normal",
+    "gaussian"
   ],
   "bugs": {
-    "url": "https://github.com/compute-io/normal-mgf/issues"
+    "url": "https://github.com/distributions-io/normal-mgf/issues"
   },
   "dependencies": {
     "compute-array-constructors": "^1.0.0",

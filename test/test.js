@@ -175,7 +175,7 @@ describe( 'distributions-normal-mgf', function tests() {
 		actual = mgf( data, {
 			'copy': false,
 			'mu': validationData.mu,
-		'sigma': validationData.sigma
+			'sigma': validationData.sigma
 		});
 		assert.strictEqual( actual, data );
 

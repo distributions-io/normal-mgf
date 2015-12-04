@@ -12,7 +12,7 @@ The [moment-generating function](https://en.wikipedia.org/wiki/Moment-generating
 	<br>
 </div>
 
-where `mu` is the mean and `sigma` is the standard deviation.
+where `mu` is the mean and `sigma > 0` is the standard deviation.
 
 ## Installation
 
@@ -83,7 +83,7 @@ The function accepts the following `options`:
 *	__path__: [deepget](https://github.com/kgryte/utils-deep-get)/[deepset](https://github.com/kgryte/utils-deep-set) key path.
 *	__sep__: [deepget](https://github.com/kgryte/utils-deep-get)/[deepset](https://github.com/kgryte/utils-deep-set) key path separator. Default: `'.'`.
 
-A [normal](https://en.wikipedia.org/wiki/normal_distribution) distribution is a function of 2 parameter(s): `mu`(mean) and `sigma`(standard deviation). By default, `mu` is equal to `0` and `sigma` is equal to `1`. To adjust either parameter, set the corresponding option(s).
+A [normal](https://en.wikipedia.org/wiki/normal_distribution) distribution is a function of two parameters: `mu`(mean) and `sigma > 0`(standard deviation). By default, `mu` is equal to `0` and `sigma` is equal to `1`. To adjust either parameter, set the corresponding option.
 
 ``` javascript
 var t = [ 0, 0.5, 1, 1.5, 2, 2.5 ];
